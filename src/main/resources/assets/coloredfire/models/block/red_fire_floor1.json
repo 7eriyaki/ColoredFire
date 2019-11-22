@@ -1,0 +1,7 @@
+{
+    "parent": "coloredfire:block/red_fire_floor",
+    "textures": {
+        "particle": "coloredfire:block/red_fire_1",
+        "fire": "coloredfire:block/red_fire_1"
+    }
+}

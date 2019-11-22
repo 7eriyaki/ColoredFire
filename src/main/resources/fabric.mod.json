@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "coloredfire",
+  "version": "${version}",
+
+  "name": "Colored Fire",
+  "description": "A mod that adds decorative colored fire",
+  "authors": [
+    "DiegoDDK"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/coloredfire/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.software.ddk.coloredfire.ColoredFireMod"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
