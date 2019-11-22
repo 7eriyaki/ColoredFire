@@ -1,0 +1,7 @@
+{
+    "parent": "coloredfire:block/green_fire_up_alt",
+    "textures": {
+        "particle": "coloredfire:block/green_fire_0",
+        "fire": "coloredfire:block/green_fire_0"
+    }
+}
