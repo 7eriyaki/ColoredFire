@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.software.ddk.coloredfire.ColoredFireMod"
+    ],
+    "client":[
+      "com.software.ddk.coloredfire.client.ClientColoredFireMod"
     ]
   },
   "mixins": [
