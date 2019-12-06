@@ -1,3 +1,5 @@
 {
-"item.wither_sword_mod.wither_sword" : "Wither Sword"
+  "item.coloredfire.flint_and_steel_blue" : "Flint and Steel Blue",
+  "item.coloredfire.flint_and_steel_red" : "Flint and Steel Red",
+  "item.coloredfire.flint_and_steel_green" : "Flint and Steel Green"
 }

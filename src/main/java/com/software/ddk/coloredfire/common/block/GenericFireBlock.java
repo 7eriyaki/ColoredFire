@@ -17,8 +17,9 @@ public class GenericFireBlock extends FireBlock {
     private StatusEffect statusEffect;
     private int effectTime;
     private int effectLevel;
+    private int colorInt;
 
-    protected GenericFireBlock(int fireTime, StatusEffect statusEffect, int effectTime, int effectLevel) {
+    public GenericFireBlock(StatusEffect statusEffect, int colorInt, int fireTime, int effectTime, int effectLevel) {
         super(FabricBlockSettings.of(Material.FIRE)
                 .noCollision()
                 .ticksRandomly()
@@ -32,6 +33,12 @@ public class GenericFireBlock extends FireBlock {
         this.statusEffect = statusEffect;
         this.effectTime = effectTime;
         this.effectLevel = effectLevel;
+        this.colorInt = colorInt;
+    }
+
+    public int getColorInt() {
+        //never used but, possibly in the future.
+        return colorInt;
     }
 
     @Override
@@ -41,5 +48,4 @@ public class GenericFireBlock extends FireBlock {
             ((LivingEntity) entity_1).addPotionEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
         }
     }
-
 }

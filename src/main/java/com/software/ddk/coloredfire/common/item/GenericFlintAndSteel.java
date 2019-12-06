@@ -1,7 +1,7 @@
 package com.software.ddk.coloredfire.common.item;
 
 import com.software.ddk.coloredfire.ModContent;
-import com.software.ddk.coloredfire.common.block.GreenFireBlock;
+import com.software.ddk.coloredfire.common.block.colored.GreenFireBlock;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -39,18 +39,16 @@ public class GenericFlintAndSteel extends Item {
 
         if (canIgnite(iWorld_1.getBlockState(blockPos), iWorld_1, blockPos)) {
             iWorld_1.playSound(playerEntity_1, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
-
-            //blockState_2 = ((GreenFireBlock) ModContent.GREEN_FIRE_BLOCK).getStateForPosition(iWorld_1, blockPos_2);
-
             iWorld_1.setBlockState(blockPos, blockState, 11);
             ItemStack itemStack_1 = itemUsageContext_1.getStack();
+
+            //todo - check this copypaste
             if (playerEntity_1 instanceof ServerPlayerEntity) {
                 Criterions.PLACED_BLOCK.handle((ServerPlayerEntity)playerEntity_1, blockPos, itemStack_1);
-                itemStack_1.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
+                itemStack_1.damage(1, playerEntity_1, ((playerEntity_1x) -> {
                     playerEntity_1x.sendToolBreakStatus(itemUsageContext_1.getHand());
                 }));
             }
-
             return ActionResult.SUCCESS;
         } else {
             blockState = iWorld_1.getBlockState(blockPos);
@@ -62,7 +60,6 @@ public class GenericFlintAndSteel extends Item {
                         playerEntity_1x.sendToolBreakStatus(itemUsageContext_1.getHand());
                     }));
                 }
-
                 return ActionResult.SUCCESS;
             } else {
                 return ActionResult.FAIL;
@@ -81,14 +78,18 @@ public class GenericFlintAndSteel extends Item {
 
 
     private static boolean isIgnitable(BlockState blockState_1) {
-        return blockState_1.getBlock() == Blocks.CAMPFIRE && !(Boolean)blockState_1.get(Properties.WATERLOGGED) && !(Boolean)blockState_1.get(Properties.LIT);
+        return blockState_1.getBlock() == Blocks.CAMPFIRE &&
+                !(Boolean)blockState_1.get(Properties.WATERLOGGED) &&
+                !(Boolean)blockState_1.get(Properties.LIT);
     }
 
     private static boolean canIgnite(BlockState blockState_1, IWorld iWorld_1, BlockPos blockPos_1) {
+        //todo - clean this copypaste.
         BlockState blockState_2 = ((FireBlock)Blocks.FIRE).getStateForPosition(iWorld_1, blockPos_1);
         boolean boolean_1 = false;
         for (Direction direction_1 : Direction.Type.HORIZONTAL) {
-            if (iWorld_1.getBlockState(blockPos_1.offset(direction_1)).getBlock() == Blocks.OBSIDIAN && ((PortalBlock) Blocks.NETHER_PORTAL).createAreaHelper(iWorld_1, blockPos_1) != null) {
+            if (iWorld_1.getBlockState(blockPos_1.offset(direction_1)).getBlock() == Blocks.OBSIDIAN &&
+                    ((PortalBlock) Blocks.NETHER_PORTAL).createAreaHelper(iWorld_1, blockPos_1) != null) {
                 boolean_1 = true;
             }
         }

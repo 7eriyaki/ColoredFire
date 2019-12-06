@@ -1,7 +1,7 @@
 package com.software.ddk.coloredfire.common.item.flintandsteel;
 
 import com.software.ddk.coloredfire.ModContent;
-import com.software.ddk.coloredfire.common.block.RedFireBlock;
+import com.software.ddk.coloredfire.common.block.colored.RedFireBlock;
 import com.software.ddk.coloredfire.common.item.GenericFlintAndSteel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
