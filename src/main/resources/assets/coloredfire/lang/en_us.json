@@ -1,5 +1,9 @@
 {
   "item.coloredfire.flint_and_steel_blue" : "Flint and Steel Blue",
   "item.coloredfire.flint_and_steel_red" : "Flint and Steel Red",
-  "item.coloredfire.flint_and_steel_green" : "Flint and Steel Green"
+  "item.coloredfire.flint_and_steel_green" : "Flint and Steel Green",
+  "item.coloredfire.flint_and_steel_black" : "Flint and Steel Black",
+  "item.coloredfire.flint_and_steel_purple" : "Flint and Steel Purple",
+  "item.coloredfire.flint_and_steel_white" : "Flint and Steel White",
+  "item.coloredfire.flint_and_steel_yellow" : "Flint and Steel Yellow"
 }
