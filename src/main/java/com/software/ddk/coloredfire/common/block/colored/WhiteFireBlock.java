@@ -7,6 +7,6 @@ public class WhiteFireBlock extends GenericFireBlock {
     public static final int COLOR = 0xffffff;
 
     public WhiteFireBlock() {
-        super(StatusEffects.LEVITATION, COLOR, 300, 10, 1);
+        super(StatusEffects.LEVITATION, COLOR, 10, 150, 1);
     }
 }

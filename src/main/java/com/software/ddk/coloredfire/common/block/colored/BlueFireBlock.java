@@ -7,6 +7,6 @@ public class BlueFireBlock extends GenericFireBlock {
     public static final int COLOR = 0x30E6FF;
 
     public BlueFireBlock() {
-        super(StatusEffects.WEAKNESS, COLOR, 200, 100, 10);
+        super(StatusEffects.WEAKNESS, COLOR, 8, 150, 10);
     }
 }

@@ -7,6 +7,6 @@ public class YellowFireBlock extends GenericFireBlock {
     public static final int COLOR = 0xFFD800;
 
     public YellowFireBlock() {
-        super(StatusEffects.JUMP_BOOST, COLOR, 400, 100, 5);
+        super(StatusEffects.JUMP_BOOST, COLOR, 8, 150, 8);
     }
 }

@@ -2,6 +2,7 @@ package com.software.ddk.coloredfire.common.item;
 
 import com.software.ddk.coloredfire.ModContent;
 import com.software.ddk.coloredfire.common.block.colored.GreenFireBlock;
+import com.software.ddk.coloredfire.common.material.GenericToolMaterial;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -9,9 +10,9 @@ import net.minecraft.block.FireBlock;
 import net.minecraft.block.PortalBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.ToolItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -21,14 +22,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
 
-public class GenericFlintAndSteel extends Item {
+public class GenericFlintAndSteel extends ToolItem {
     public GenericFlintAndSteel(Settings item$Settings) {
-        super(item$Settings);
+        super(GenericToolMaterial.FLINT_TOOL_MATERIAL, item$Settings);
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext itemUsageContext_1) {
         //default color green, need to override this example code.
+        //sendBreakStatus(itemUsageContext_1);
         return onUse(itemUsageContext_1, ((GreenFireBlock) ModContent.GREEN_FIRE_BLOCK).getStateForPosition(getContextIworld(itemUsageContext_1), getContextBlockPos(itemUsageContext_1)));
     }
 
@@ -42,10 +44,9 @@ public class GenericFlintAndSteel extends Item {
             iWorld_1.setBlockState(blockPos, blockState, 11);
             ItemStack itemStack_1 = itemUsageContext_1.getStack();
 
-            //todo - check this copypaste
             if (playerEntity_1 instanceof ServerPlayerEntity) {
                 Criterions.PLACED_BLOCK.handle((ServerPlayerEntity)playerEntity_1, blockPos, itemStack_1);
-                itemStack_1.damage(1, playerEntity_1, ((playerEntity_1x) -> {
+                itemStack_1.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
                     playerEntity_1x.sendToolBreakStatus(itemUsageContext_1.getHand());
                 }));
             }
@@ -76,14 +77,13 @@ public class GenericFlintAndSteel extends Item {
         return blockPos_1.offset(itemUsageContext.getSide());
     }
 
-
-    private static boolean isIgnitable(BlockState blockState_1) {
+    public static boolean isIgnitable(BlockState blockState_1) {
         return blockState_1.getBlock() == Blocks.CAMPFIRE &&
                 !(Boolean)blockState_1.get(Properties.WATERLOGGED) &&
                 !(Boolean)blockState_1.get(Properties.LIT);
     }
 
-    private static boolean canIgnite(BlockState blockState_1, IWorld iWorld_1, BlockPos blockPos_1) {
+    public static boolean canIgnite(BlockState blockState_1, IWorld iWorld_1, BlockPos blockPos_1) {
         //todo - clean this copypaste.
         BlockState blockState_2 = ((FireBlock)Blocks.FIRE).getStateForPosition(iWorld_1, blockPos_1);
         boolean boolean_1 = false;

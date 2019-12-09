@@ -7,6 +7,6 @@ public class GreenFireBlock extends GenericFireBlock {
     public static final int COLOR = 0xDD32F224;
 
     public GreenFireBlock() {
-        super(StatusEffects.POISON, COLOR, 400, 200, 40);
+        super(StatusEffects.POISON, COLOR, 16, 250, 30);
     }
 }

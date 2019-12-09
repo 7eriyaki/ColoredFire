@@ -7,6 +7,6 @@ public class RedFireBlock extends GenericFireBlock {
     public static final int COLOR = 0xDDFF342D;
 
     public RedFireBlock() {
-        super(StatusEffects.REGENERATION, COLOR, 200, 100, 10);
+        super(StatusEffects.REGENERATION, COLOR, 8, 200, 14);
     }
 }
