@@ -45,7 +45,7 @@ public class GenericFlintAndSteel extends ToolItem {
             ItemStack itemStack_1 = itemUsageContext_1.getStack();
 
             if (playerEntity_1 instanceof ServerPlayerEntity) {
-                Criterions.PLACED_BLOCK.handle((ServerPlayerEntity)playerEntity_1, blockPos, itemStack_1);
+                Criterions.PLACED_BLOCK.trigger((ServerPlayerEntity)playerEntity_1, blockPos, itemStack_1);
                 itemStack_1.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
                     playerEntity_1x.sendToolBreakStatus(itemUsageContext_1.getHand());
                 }));
