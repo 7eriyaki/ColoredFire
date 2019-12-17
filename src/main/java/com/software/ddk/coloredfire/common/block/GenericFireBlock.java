@@ -1,16 +1,19 @@
 package com.software.ddk.coloredfire.common.block;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FireBlock;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class GenericFireBlock extends FireBlock {
@@ -19,6 +22,7 @@ public class GenericFireBlock extends FireBlock {
     private int effectTime;
     private int effectLevel;
     private int colorInt;
+    private VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 0.1D, 16.0D);
 
     public GenericFireBlock(StatusEffect statusEffect, int colorInt, int fireTime, int effectTime, int effectLevel) {
         super(FabricBlockSettings.of(Material.FIRE)
@@ -50,8 +54,18 @@ public class GenericFireBlock extends FireBlock {
     @Override
     public void onEntityCollision(BlockState blockState_1, World world_1, BlockPos blockPos_1, Entity entity_1) {
         entity_1.setOnFireFor(fireTime);
-        if (entity_1.isLiving()){
+        if (entity_1.isAlive()){
             ((LivingEntity) entity_1).addStatusEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
         }
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
+        return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
+        return SHAPE;
     }
 }

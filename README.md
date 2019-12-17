@@ -11,5 +11,5 @@ Craft flint and steel with a dye to get a custom colored flint and steel, curren
 * White fire gives levitation effect (test)
 * Yellow fire gives jump boost effect (very test)
 
-Minecraft version: 1.15
+Minecraft version: 1.15.1-pre1
 Requires Fabric Api
