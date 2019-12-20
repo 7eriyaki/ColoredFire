@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "coloredfire:item/flint_and_steel_dyeable_0",
+        "layer1": "coloredfire:item/flint_and_steel_dyeable_1"
+    }
+}

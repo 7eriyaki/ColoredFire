@@ -9,11 +9,11 @@
     "DiegoDDK"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Diegoddk",
+    "sources": "https://github.com/Diegoddk/ColoredFire"
   },
 
-  "license": "CC0-1.0",
+  "license": "WTFPL",
   "icon": "assets/coloredfire/icon.png",
 
   "environment": "*",

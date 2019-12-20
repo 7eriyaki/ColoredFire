@@ -1,13 +1,19 @@
 package com.software.ddk.coloredfire;
 
 import com.software.ddk.coloredfire.common.block.colored.*;
+import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlock;
+import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
 import com.software.ddk.coloredfire.common.item.flintandsteel.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModContent {
+
+    public static BlockEntityType<DyeableFireBlockEntity> DYEABLEFIREBLOCKENTITY;
+
     public static Block BLUE_FIRE_BLOCK = new BlueFireBlock();
     public static Block RED_FIRE_BLOCK = new RedFireBlock();
     public static Block GREEN_FIRE_BLOCK = new GreenFireBlock();
@@ -15,6 +21,7 @@ public class ModContent {
     public static Block PURPLE_FIRE_BLOCK = new PurpleFireBlock();
     public static Block WHITE_FIRE_BLOCK = new WhiteFireBlock();
     public static Block YELLOW_FIRE_BLOCK = new YellowFireBlock();
+    public static Block DYEABLE_FIRE_BLOCK = new DyeableFireBlock();
 
     public static Item FLINT_AND_STEEL_BLUE = new FlintAndSteelBlueItem();
     public static Item FLINT_AND_STEEL_RED = new FlintAndSteelRedItem();
@@ -23,8 +30,12 @@ public class ModContent {
     public static Item FLINT_AND_STEEL_PURPLE = new FlintAndSteelPurpleItem();
     public static Item FLINT_AND_STEEL_WHITE = new FlintAndSteelWhiteItem();
     public static Item FLINT_AND_STEEL_YELLOW = new FlintAndSteelYellowItem();
+    public static Item FLINT_AND_STEEL_DYEABLE = new FlintAndSteelDyeableItem();
 
     public static void RegisterAll(){
+
+        //blockentity
+        DYEABLEFIREBLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));
 
         //blocks
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "blue_fire"), BLUE_FIRE_BLOCK);
@@ -34,6 +45,7 @@ public class ModContent {
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "white_fire"), WHITE_FIRE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "purple_fire"), PURPLE_FIRE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "yellow_fire"), YELLOW_FIRE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "dyeable_fire"), DYEABLE_FIRE_BLOCK);
 
         //items
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_blue"), FLINT_AND_STEEL_BLUE);
@@ -43,6 +55,7 @@ public class ModContent {
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_purple"), FLINT_AND_STEEL_PURPLE);
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_white"), FLINT_AND_STEEL_WHITE);
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_yellow"), FLINT_AND_STEEL_YELLOW);
+        Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_dyeable"), FLINT_AND_STEEL_DYEABLE);
 
     }
 }

@@ -1,0 +1,30 @@
+package com.software.ddk.coloredfire.common.item.flintandsteel;
+
+import com.software.ddk.coloredfire.ModContent;
+import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlock;
+import com.software.ddk.coloredfire.common.item.GenericFlintAndSteel;
+import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.ActionResult;
+
+public class FlintAndSteelDyeableItem extends GenericFlintAndSteel implements DyeableItem {
+
+    public FlintAndSteelDyeableItem() {
+        super(new Item.Settings().group(ItemGroup.TOOLS));
+    }
+
+    @Override
+    public int getColor(ItemStack stack) {
+        CompoundTag compoundTag = stack.getSubTag("display");
+        return compoundTag != null && compoundTag.contains("color", 99) ? compoundTag.getInt("color") : 0xffffff;
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext itemUsageContext_1) {
+        DyeableFireBlock block = ((DyeableFireBlock) ModContent.DYEABLE_FIRE_BLOCK);
+        block.setCOLOR(this.getColor(itemUsageContext_1.getStack()));
+        //System.out.println("block color: " + block.getCOLOR());
+        return onUse(itemUsageContext_1, block.getStateForPosition(getContextIworld(itemUsageContext_1), getContextBlockPos(itemUsageContext_1)));
+    }
+
+}
