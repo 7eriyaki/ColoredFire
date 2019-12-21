@@ -11,6 +11,7 @@ public class DyeableFireBlock extends GenericFireBlock implements BlockEntityPro
 
     public DyeableFireBlock() {
         super(StatusEffects.INSTANT_DAMAGE, 0xffffff, 8, 1, 1);
+        this.setEffect(false);
     }
 
     public int getCOLOR(){

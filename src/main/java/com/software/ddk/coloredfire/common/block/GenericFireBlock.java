@@ -22,6 +22,7 @@ public class GenericFireBlock extends FireBlock {
     private int effectTime;
     private int effectLevel;
     private int colorInt;
+    private boolean effect = true;
     private VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 0.1D, 16.0D);
 
     public GenericFireBlock(StatusEffect statusEffect, int colorInt, int fireTime, int effectTime, int effectLevel) {
@@ -41,6 +42,19 @@ public class GenericFireBlock extends FireBlock {
         this.colorInt = colorInt;
     }
 
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        //disable particles
+    }
+
+    public void setEffect(boolean bool){
+        this.effect = bool;
+    }
+
+    public boolean isEffect(){
+        return this.effect;
+    }
+
     public int getColorInt() {
         //never used but, possibly in the future.
         return colorInt;
@@ -54,7 +68,7 @@ public class GenericFireBlock extends FireBlock {
     @Override
     public void onEntityCollision(BlockState blockState_1, World world_1, BlockPos blockPos_1, Entity entity_1) {
         entity_1.setOnFireFor(fireTime);
-        if (entity_1.isAlive()){
+        if (isEffect() && entity_1.isAlive()){
             ((LivingEntity) entity_1).addStatusEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
         }
     }
