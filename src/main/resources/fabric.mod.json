@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Colored Fire",
-  "description": "Add decorative coloured and dyeable fire",
+  "description": "Add decorative colored and dyeable fire",
   "authors": [
     "DiegoDDK"
   ],
@@ -26,8 +26,11 @@
     ]
   },
   "mixins": [
+    {
+      "environment" : "*",
+      "config" : "coloredfire.mixins.json"
+    }
   ],
-
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
