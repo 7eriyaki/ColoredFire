@@ -1,4 +1,5 @@
 {
+  "itemGroup.coloredfire.group" : "§cC§co§6l§eo§2r§ae§bd §3F§1i§9r§5e",
   "item.coloredfire.flint_and_steel_blue" : "Flint and Steel Blue",
   "item.coloredfire.flint_and_steel_red" : "Flint and Steel Red",
   "item.coloredfire.flint_and_steel_green" : "Flint and Steel Green",
@@ -6,5 +7,13 @@
   "item.coloredfire.flint_and_steel_purple" : "Flint and Steel Purple",
   "item.coloredfire.flint_and_steel_white" : "Flint and Steel White",
   "item.coloredfire.flint_and_steel_yellow" : "Flint and Steel Yellow",
-  "item.coloredfire.flint_and_steel_dyeable" : "Flint and Steel Dyeable"
+  "item.coloredfire.flint_and_steel_dyeable" : "Flint and Steel Dyeable",
+  "coloredfire.flint_and_steel_black.tooltip" : "§6Black fire, §egives wither effect",
+  "coloredfire.flint_and_steel_blue.tooltip" : "§6Blue fire, §egives weakness effect",
+  "coloredfire.flint_and_steel_green.tooltip" : "§6Green fire, §egives poison effect, a dangerous fire",
+  "coloredfire.flint_and_steel_purple.tooltip" : "§6Purple fire, §egives night vision effect",
+  "coloredfire.flint_and_steel_red.tooltip" : "§6Red fire, gives §eregeneration effect",
+  "coloredfire.flint_and_steel_white.tooltip" : "§6White fire, §egives levitation effect",
+  "coloredfire.flint_and_steel_yellow.tooltip" : "§6Yellow fire, §egives jump boost effect",
+  "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Dyeable fire, decorative colored fire"
 }

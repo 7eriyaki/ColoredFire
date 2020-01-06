@@ -28,7 +28,6 @@ public class ClientColoredFireMod implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> YellowFireBlock.COLOR, YELLOW_FIRE_BLOCK);
 
         //dyeable fire
-        //todo - a bit hacky
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             int color = ((DyeableItem) stack.getItem()).getColor(stack);
             if (tintIndex == 1){ return color; } else { return 0xffffff; }
@@ -37,6 +36,7 @@ public class ClientColoredFireMod implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             World world = MinecraftClient.getInstance().world;
             assert world != null;
+            assert pos != null;
             if (world.getBlockState(pos).getBlock().hasBlockEntity()){
                 return ((DyeableFireBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR();
             } else {

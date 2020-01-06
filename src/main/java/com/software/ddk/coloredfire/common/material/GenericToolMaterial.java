@@ -12,7 +12,7 @@ public class GenericToolMaterial implements ToolMaterial{
 	private int enchantability;
 	private Ingredient repairIngredient;
 
-	public static ToolMaterial FLINT_TOOL_MATERIAL = new GenericToolMaterial(150, 1.0f, 1.0f, 1, 1, Ingredient.ofItems(Items.IRON_BARS));
+	public static ToolMaterial FLINT_TOOL_MATERIAL = new GenericToolMaterial(150, 1.0f, 1.0f, 1, 1, Ingredient.ofItems(Items.FLINT));
 
 	public GenericToolMaterial(int durability, float miningSpeed, float attackDamage, int miningLevel, int enchantability, Ingredient ingredient){
 		this.durability = durability;
@@ -25,7 +25,7 @@ public class GenericToolMaterial implements ToolMaterial{
 
 	@Override
 	public int getDurability() {
-		return durability; //1561
+		return durability;
 	}
 
 	@Override

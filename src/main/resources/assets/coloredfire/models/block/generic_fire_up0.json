@@ -1,7 +1,7 @@
 {
     "parent": "coloredfire:block/generic_fire_up",
     "textures": {
-        "particle": "coloredfire:block/generic_fire_0",
+        "particle": "coloredfire:block/particle",
         "fire": "coloredfire:block/generic_fire_0"
     }
 }

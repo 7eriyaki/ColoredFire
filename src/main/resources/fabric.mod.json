@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Colored Fire",
-  "description": "Add decorative colored and dyeable fire",
+  "description": "Adds decorative colored and dyeable fire",
   "authors": [
     "DiegoDDK"
   ],
@@ -13,7 +13,7 @@
     "sources": "https://github.com/Diegoddk/ColoredFire"
   },
 
-  "license": "WTFPL",
+  "license": "MIT",
   "icon": "assets/coloredfire/icon.png",
 
   "environment": "*",

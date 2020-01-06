@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -66,8 +67,10 @@ public class GenericFireBlock extends FireBlock {
     @Override
     public void onEntityCollision(BlockState blockState_1, World world_1, BlockPos blockPos_1, Entity entity_1) {
         entity_1.setOnFireFor(fireTime);
-        if (isEffect() && entity_1.isAlive()){
-            ((LivingEntity) entity_1).addStatusEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
+        if (!(entity_1 instanceof ItemEntity)){
+            if (isEffect() && entity_1.isAlive()){
+                ((LivingEntity) entity_1).addStatusEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
+            }
         }
     }
 
