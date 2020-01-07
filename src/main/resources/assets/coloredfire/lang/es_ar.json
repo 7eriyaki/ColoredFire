@@ -1,0 +1,19 @@
+{
+  "itemGroup.coloredfire.group" : "§cC§co§6l§eo§2r§ae§bd §3F§1i§9r§5e",
+  "item.coloredfire.flint_and_steel_blue" : "Encendedor azul",
+  "item.coloredfire.flint_and_steel_red" : "Mechero rojo",
+  "item.coloredfire.flint_and_steel_green" : "Mechero verde",
+  "item.coloredfire.flint_and_steel_black" : "Encendedor negro",
+  "item.coloredfire.flint_and_steel_purple" : "Encendedor purpura",
+  "item.coloredfire.flint_and_steel_white" : "Encendedor blanco",
+  "item.coloredfire.flint_and_steel_yellow" : "Encendedor amarillo",
+  "item.coloredfire.flint_and_steel_dyeable" : "Encendedor coloreable",
+  "coloredfire.flint_and_steel_black.tooltip" : "§6Fuego negro, §eaplica el efecto wither",
+  "coloredfire.flint_and_steel_blue.tooltip" : "§6Fuego azul, §eaplica el efecto de debilidad",
+  "coloredfire.flint_and_steel_green.tooltip" : "§6Fuego verde, §eaplica el efecto de veneno, un fuego peligroso",
+  "coloredfire.flint_and_steel_purple.tooltip" : "§6Fuego purpura, §eaplica el efecto de vision nocturna",
+  "coloredfire.flint_and_steel_red.tooltip" : "§6Fuego rojo, §eaplica el efecto de regeneración",
+  "coloredfire.flint_and_steel_white.tooltip" : "§6Fuego blanco, §eaplica el efecto de levitación",
+  "coloredfire.flint_and_steel_yellow.tooltip" : "§6Fuego amarillo, §eaplica el efecto de salto",
+  "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Fuego coloreable, de uso decorativo"
+}
