@@ -14,7 +14,7 @@ public class GenericToolMaterial implements ToolMaterial{
 
 	public static ToolMaterial FLINT_TOOL_MATERIAL = new GenericToolMaterial(150, 1.0f, 1.0f, 1, 1, Ingredient.ofItems(Items.FLINT));
 
-	public GenericToolMaterial(int durability, float miningSpeed, float attackDamage, int miningLevel, int enchantability, Ingredient ingredient){
+	private GenericToolMaterial(int durability, float miningSpeed, float attackDamage, int miningLevel, int enchantability, Ingredient ingredient){
 		this.durability = durability;
 		this.miningSpeed = miningSpeed;
 		this.attackDamage = attackDamage;

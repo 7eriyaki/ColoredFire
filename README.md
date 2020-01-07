@@ -5,7 +5,7 @@
 
 This mod adds colored fire with varied effects to the game.
 
-**There is 7 exclusive colors each one with its own effect:**
+**There are 7 exclusive colors each with its own effect:**
 * Green fire gives poison effect
 * Red fire gives regeneration effect
 * Blue fire gives weakness effect
@@ -13,9 +13,6 @@ This mod adds colored fire with varied effects to the game.
 * Purple fire gives night vision effect
 * White fire gives levitation effect
 * Yellow fire gives jump boost effect
-
-**Also there is a dyeable fire, a standard fire but its colored, and when you drop a dyeitem over it
-the fire color changes to the dyeitem color**
 
 - Colored Flint and Steel crafting:
     - Green fire: flint and steel + spider eye
@@ -26,6 +23,8 @@ the fire color changes to the dyeitem color**
     - White fire: same + shulker shell
     - Yellow fire: same + rabbit foot
 
+**There is also a dyeable fire with a dyeable flint and steel, the fire changes color when a dye is thrown over**
+
 - Dyeable Flint and Steel crafting:
-Craft flint and steel with a paper to get the dyeable flint and steel.
+Crafted using flint and steel with a paper
 

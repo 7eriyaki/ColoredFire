@@ -5,7 +5,6 @@ import com.software.ddk.coloredfire.common.block.colored.GreenFireBlock;
 import com.software.ddk.coloredfire.common.item.GenericFlintAndSteel;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.Text;

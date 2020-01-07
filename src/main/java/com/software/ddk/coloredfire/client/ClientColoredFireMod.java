@@ -17,31 +17,22 @@ public class ClientColoredFireMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
         //colored fire tints
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> BlueFireBlock.COLOR, BLUE_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> RedFireBlock.COLOR, RED_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> GreenFireBlock.COLOR, GREEN_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? BlueFireBlock.COLOR : 0xBFF7FF, BLUE_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? RedFireBlock.COLOR : 0xFF7F7F, RED_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? GreenFireBlock.COLOR : 0x96ED8E, GREEN_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> BlackFireBlock.COLOR, BLACK_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> PurpleFireBlock.COLOR, PURPLE_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? PurpleFireBlock.COLOR : 0xD68CFF, PURPLE_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> WhiteFireBlock.COLOR, WHITE_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> YellowFireBlock.COLOR, YELLOW_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? YellowFireBlock.COLOR : 0xFFE97C, YELLOW_FIRE_BLOCK);
 
         //dyeable fire
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-            int color = ((DyeableItem) stack.getItem()).getColor(stack);
-            if (tintIndex == 1){ return color; } else { return 0xffffff; }
-        }, FLINT_AND_STEEL_DYEABLE);
-
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (tintIndex == 1) ? ((DyeableItem) stack.getItem()).getColor(stack) : 0xffffff, FLINT_AND_STEEL_DYEABLE);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             World world = MinecraftClient.getInstance().world;
             assert world != null;
             assert pos != null;
-            if (world.getBlockState(pos).getBlock().hasBlockEntity()){
-                return ((DyeableFireBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR();
-            } else {
-                return 0xffffff;
-            }
+            return (state.getBlock().hasBlockEntity()) ? ((DyeableFireBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
         }, DYEABLE_FIRE_BLOCK);
 
         //renderlayers

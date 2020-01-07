@@ -37,7 +37,6 @@ public class DyeableFireBlock extends GenericFireBlock implements BlockEntityPro
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
         if (entity instanceof ItemEntity){
-            //System.out.println("item!");
             ItemStack stack = ((ItemEntity) entity).getStack();
             if (stack.getItem() instanceof DyeItem){
                 int dyeColor = ((DyeItem) stack.getItem()).getColor().getFireworkColor();
@@ -51,24 +50,30 @@ public class DyeableFireBlock extends GenericFireBlock implements BlockEntityPro
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (player.getStackInHand(hand).getItem() instanceof DyeItem){
+        ItemStack stack = player.getStackInHand(hand);
+        if (stack.getItem() instanceof DyeItem){
             int dyeColor = ((DyeItem) player.getStackInHand(hand).getItem()).getColor().getFireworkColor();
-            //int blockDye = ((DyeableFireBlock) world.getBlockState(pos).getBlock()).getCOLOR();
-            //int resultColor = blockDye + dyeColor;
-            //System.out.println("result: " + resultColor);
             if (world.getBlockState(pos).getBlock().hasBlockEntity()){
                 dyeAction(world, pos, dyeColor);
                 world.updateListeners(pos, state, state, 1);
+                stack.decrement(1);
+                player.setStackInHand(hand, stack);
             }
+            return ActionResult.SUCCESS;
         }
-        return ActionResult.SUCCESS;
+        return ActionResult.FAIL;
     }
 
     private void dyeAction(World world, BlockPos pos, int dyeColor){
-        DyeableFireBlockEntity blockEntity = ((DyeableFireBlockEntity) world.getBlockEntity(pos));
-        blockEntity.setCOLOR(dyeColor);
-        if (!world.isClient()){
-            blockEntity.sync();
+        if (world.getBlockState(pos).getBlock().hasBlockEntity()){
+            DyeableFireBlockEntity blockEntity = ((DyeableFireBlockEntity) world.getBlockEntity(pos));
+            DyeableFireBlock block = (DyeableFireBlock) world.getBlockState(pos).getBlock();
+            assert blockEntity != null;
+            block.setCOLOR(dyeColor);
+            blockEntity.setCOLOR(dyeColor);
+            if (!world.isClient()){
+                blockEntity.sync();
+            }
         }
     }
 

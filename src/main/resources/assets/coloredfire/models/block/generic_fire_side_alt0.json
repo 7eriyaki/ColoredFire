@@ -2,6 +2,7 @@
     "parent": "coloredfire:block/generic_fire_side_alt",
     "textures": {
         "particle": "coloredfire:block/particle",
-        "fire": "coloredfire:block/generic_fire_0"
+        "fire": "coloredfire:block/generic_fire_0",
+        "overlay" : "coloredfire:block/generic_fire_0_overlay"
     }
 }

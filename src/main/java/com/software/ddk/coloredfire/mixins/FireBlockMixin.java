@@ -1,5 +1,6 @@
 package com.software.ddk.coloredfire.mixins;
 
+import com.software.ddk.coloredfire.ColoredFireMod;
 import com.software.ddk.coloredfire.ModContent;
 import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlock;
@@ -19,7 +20,7 @@ public abstract class FireBlockMixin extends Block {
 
     @Inject(at = @At("HEAD"), method = "registerDefaultFlammables")
     private static void onRegisterDefaultFlammables(CallbackInfo ci){
-        LOGGER.info("Registering custom fire flamables integration...");
+        ColoredFireMod.COLOREDLOG.info("Registering custom fire flammables integration...");
         Object[][] flammables = getFireArray();
 
         //custom fire flamables registering

@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Colored Fire",
-  "description": "Adds decorative colored and dyeable fire",
+  "description": "Colorful and decorative dyeable flames",
   "authors": [
     "DiegoDDK"
   ],
@@ -33,9 +33,10 @@
   ],
   "depends": {
     "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabric": "*",
+    "minecraft": "1.15.x"
   },
   "suggests": {
-    "flamingo": "*"
+    "me": "*"
   }
 }

@@ -16,8 +16,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class GenericFireBlock extends FireBlock {
-    private int fireTime;
     private StatusEffect statusEffect;
+    private int fireTime;
     private int effectTime;
     private int effectLevel;
     private int colorInt;
@@ -33,7 +33,6 @@ public class GenericFireBlock extends FireBlock {
                 .sounds(BlockSoundGroup.WOOL)
                 .dropsNothing()
                 .build());
-
         this.fireTime = fireTime;
         this.statusEffect = statusEffect;
         this.effectTime = effectTime;
@@ -55,7 +54,6 @@ public class GenericFireBlock extends FireBlock {
     }
 
     public int getColorInt() {
-        //never used but, possibly in the future.
         return colorInt;
     }
 
@@ -65,12 +63,10 @@ public class GenericFireBlock extends FireBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState blockState_1, World world_1, BlockPos blockPos_1, Entity entity_1) {
-        entity_1.setOnFireFor(fireTime);
-        if (!(entity_1 instanceof ItemEntity)){
-            if (isEffect() && entity_1.isAlive()){
-                ((LivingEntity) entity_1).addStatusEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
-            }
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        entity.setOnFireFor(fireTime);
+        if (!(entity instanceof ItemEntity) && (isEffect() && entity.isAlive())){
+            ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(statusEffect, effectTime, effectLevel));
         }
     }
 

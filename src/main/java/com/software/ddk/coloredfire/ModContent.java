@@ -39,6 +39,7 @@ public class ModContent {
     public static Item FLINT_AND_STEEL_DYEABLE = new FlintAndSteelDyeableItem();
 
     public static void RegisterAll(){
+        ColoredFireMod.COLOREDLOG.info("Colored Fire Mod Loading");
 
         //blockentity
         DYEABLEFIREBLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));

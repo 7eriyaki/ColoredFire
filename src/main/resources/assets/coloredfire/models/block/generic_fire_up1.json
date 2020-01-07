@@ -2,6 +2,7 @@
     "parent": "coloredfire:block/generic_fire_up",
     "textures": {
         "particle": "coloredfire:block/particle",
-        "fire": "coloredfire:block/generic_fire_1"
+        "fire": "coloredfire:block/generic_fire_1",
+        "overlay" : "coloredfire:block/generic_fire_1_overlay"
     }
 }
