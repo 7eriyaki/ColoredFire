@@ -2,6 +2,7 @@ package com.software.ddk.coloredfire.client;
 
 import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
+import com.software.ddk.coloredfire.util.Colors;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.ColorProviderRegistry;
@@ -18,13 +19,13 @@ public class ClientColoredFireMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         //colored fire tints
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? BlueFireBlock.COLOR : 0xBFF7FF, BLUE_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? RedFireBlock.COLOR : 0xFF7F7F, RED_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? GreenFireBlock.COLOR : 0x96ED8E, GREEN_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> BlackFireBlock.COLOR, BLACK_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? PurpleFireBlock.COLOR : 0xD68CFF, PURPLE_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? BlueFireBlock.COLOR : BlueFireBlock.COLOR_BRIGHT, BLUE_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? RedFireBlock.COLOR : RedFireBlock.COLOR_BRIGHT, RED_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? GreenFireBlock.COLOR : GreenFireBlock.COLOR_BRIGHT, GREEN_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? PurpleFireBlock.COLOR : PurpleFireBlock.COLOR_BRIGHT, PURPLE_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> WhiteFireBlock.COLOR, WHITE_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? YellowFireBlock.COLOR : 0xFFE97C, YELLOW_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? YellowFireBlock.COLOR : YellowFireBlock.COLOR_BRIGHT, YELLOW_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? BlackFireBlock.COLOR : BlackFireBlock.COLOR_BRIGHT, BLACK_FIRE_BLOCK);
 
         //dyeable fire
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (tintIndex == 1) ? ((DyeableItem) stack.getItem()).getColor(stack) : 0xffffff, FLINT_AND_STEEL_DYEABLE);
@@ -32,7 +33,8 @@ public class ClientColoredFireMod implements ClientModInitializer {
             World world = MinecraftClient.getInstance().world;
             assert world != null;
             assert pos != null;
-            return (state.getBlock().hasBlockEntity()) ? ((DyeableFireBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
+            int color = (state.getBlock().hasBlockEntity()) ? ((DyeableFireBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
+            return (tintIndex == 0) ? color : Colors.colorLighter(color, 0.88f);
         }, DYEABLE_FIRE_BLOCK);
 
         //renderlayers

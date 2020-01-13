@@ -9,7 +9,7 @@ public class DyeableFireBlockEntity extends BlockEntity implements BlockEntityCl
     private int COLOR;
 
     public DyeableFireBlockEntity() {
-        super(ModContent.DYEABLEFIREBLOCKENTITY);
+        super(ModContent.DYEABLE_FIRE_BLOCK_ENTITY);
     }
 
     public void setCOLOR(int COLOR) {

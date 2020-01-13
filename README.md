@@ -1,4 +1,4 @@
-# Colored Fire
+# Colored Flames
 **Minecraft version: 1.15.x - requires Fabric Api**
 
 ![logo](https://github.com/Diegoddk/ColoredFire/raw/master/src/main/resources/assets/coloredfire/icon.png)

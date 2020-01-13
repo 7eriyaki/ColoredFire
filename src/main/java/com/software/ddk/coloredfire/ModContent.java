@@ -14,11 +14,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModContent {
-
     //group
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(new Identifier(ColoredFireMod.MODID, "group"), () -> new ItemStack(ModContent.FLINT_AND_STEEL_RED));
-
-    public static BlockEntityType<DyeableFireBlockEntity> DYEABLEFIREBLOCKENTITY;
+    public static BlockEntityType<DyeableFireBlockEntity> DYEABLE_FIRE_BLOCK_ENTITY;
 
     public static Block BLUE_FIRE_BLOCK = new BlueFireBlock();
     public static Block RED_FIRE_BLOCK = new RedFireBlock();
@@ -39,10 +37,10 @@ public class ModContent {
     public static Item FLINT_AND_STEEL_DYEABLE = new FlintAndSteelDyeableItem();
 
     public static void RegisterAll(){
-        ColoredFireMod.COLOREDLOG.info("Colored Fire Mod Loading");
+        ColoredFireMod.COLOREDLOG.info("Colored Flames Mod Loading");
 
         //blockentity
-        DYEABLEFIREBLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));
+        DYEABLE_FIRE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));
 
         //blocks
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "blue_fire"), BLUE_FIRE_BLOCK);
