@@ -40,7 +40,7 @@ public class ModContent {
         ColoredFireMod.COLOREDLOG.info("Colored Flames Mod Loading");
 
         //blockentity
-        DYEABLE_FIRE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));
+        DYEABLE_FIRE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));
 
         //blocks
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "blue_fire"), BLUE_FIRE_BLOCK);

@@ -5,7 +5,7 @@ import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
 import com.software.ddk.coloredfire.util.Colors;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.DyeableItem;
