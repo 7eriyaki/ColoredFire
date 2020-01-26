@@ -15,5 +15,7 @@
   "coloredfire.flint_and_steel_red.tooltip" : "§6Fuego rojo, §eaplica el efecto de regeneración",
   "coloredfire.flint_and_steel_white.tooltip" : "§6Fuego blanco, §eaplica el efecto de levitación",
   "coloredfire.flint_and_steel_yellow.tooltip" : "§6Fuego amarillo, §eaplica el efecto de salto",
-  "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Fuego coloreable, de uso decorativo"
+  "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Fuego coloreable, de uso decorativo",
+  "block.coloredfire.generic_torch" : "Antorcha coloreable",
+  "coloredfire.generic_torch.tooltip" : "§6Antorcha coloreable, de uso decorativo"
 }

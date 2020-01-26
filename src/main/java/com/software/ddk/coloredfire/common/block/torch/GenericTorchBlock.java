@@ -9,6 +9,7 @@ import net.minecraft.block.Material;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.MinecraftClientGame;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -58,12 +59,15 @@ public class GenericTorchBlock extends TorchBlock implements BlockEntityProvider
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        GenericTorchItem item = (GenericTorchItem) state.getBlock().asItem();
-        ItemStack stack = new ItemStack(item);
-        int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
-        item.setColor(stack, color);
-        ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
-        world.spawnEntity(entity);
+        if (!player.abilities.creativeMode){
+            //cancel on creative
+            GenericTorchItem item = (GenericTorchItem) state.getBlock().asItem();
+            ItemStack stack = new ItemStack(item);
+            int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
+            item.setColor(stack, color);
+            ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
+            world.spawnEntity(entity);
+        }
         super.onBreak(world, pos, state, player);
     }
 

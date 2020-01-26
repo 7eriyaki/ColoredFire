@@ -16,5 +16,6 @@
   "coloredfire.flint_and_steel_white.tooltip" : "§6White fire, §egives levitation effect",
   "coloredfire.flint_and_steel_yellow.tooltip" : "§6Yellow fire, §egives jump boost effect",
   "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Dyeable fire, decorative colored fire",
-  "item.coloredfire.generic_torch" : "Dyeable Torch"
+  "block.coloredfire.generic_torch" : "Dyeable Torch",
+  "coloredfire.generic_torch.tooltip" : "§6Dyeable Torch, decorative torches"
 }

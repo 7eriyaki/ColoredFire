@@ -56,12 +56,15 @@ public class GenericWallTorchBlock extends WallTorchBlock implements BlockEntity
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        GenericTorchItem item = (GenericTorchItem) state.getBlock().asItem();
-        ItemStack stack = new ItemStack(item);
-        int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
-        item.setColor(stack, color);
-        ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
-        world.spawnEntity(entity);
+        if (!player.abilities.creativeMode){
+            //cancel on creative
+            GenericTorchItem item = (GenericTorchItem) state.getBlock().asItem();
+            ItemStack stack = new ItemStack(item);
+            int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
+            item.setColor(stack, color);
+            ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
+            world.spawnEntity(entity);
+        }
         super.onBreak(world, pos, state, player);
     }
 

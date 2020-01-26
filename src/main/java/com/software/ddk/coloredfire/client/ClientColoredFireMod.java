@@ -51,7 +51,12 @@ public class ClientColoredFireMod implements ClientModInitializer {
             World world = MinecraftClient.getInstance().world;
             assert world != null;
             assert pos != null;
-            int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR()  : 0xffffff;
+            int color = 0xffffff;
+            try {
+                color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR()  : 0xffffff;
+            } catch (NullPointerException e){
+                //todo - temporary fix for a crash with conveyance 0.3.2
+            }
             return (tintIndex == 0) ? color : (tintIndex == 2) ? Colors.colorLighter(color, 0.88f) : 0xffffff;
         }, GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
 

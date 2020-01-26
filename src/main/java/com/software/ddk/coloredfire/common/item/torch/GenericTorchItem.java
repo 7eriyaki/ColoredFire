@@ -4,12 +4,18 @@ import com.software.ddk.coloredfire.ModContent;
 import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlock;
 import com.software.ddk.coloredfire.common.block.torch.GenericWallTorchBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+
+import java.util.List;
 
 public class GenericTorchItem extends WallStandingBlockItem implements DyeableItem {
 
@@ -26,6 +32,12 @@ public class GenericTorchItem extends WallStandingBlockItem implements DyeableIt
     @Override
     public void setColor(ItemStack stack, int color) {
         stack.getOrCreateSubTag("display").putInt("color", color);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(new TranslatableText("coloredfire.generic_torch.tooltip"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
