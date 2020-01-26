@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east": { "model": "coloredfire:block/generic_wall_torch" },
+        "facing=south": { "model": "coloredfire:block/generic_wall_torch", "y": 90 },
+        "facing=west": { "model": "coloredfire:block/generic_wall_torch", "y": 180 },
+        "facing=north": { "model": "coloredfire:block/generic_wall_torch", "y": 270 }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "coloredfire:block/generic_torch",
+        "layer1": "coloredfire:block/generic_torch_tint"
+    }
+}

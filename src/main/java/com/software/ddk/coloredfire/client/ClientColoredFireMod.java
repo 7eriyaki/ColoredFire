@@ -1,14 +1,22 @@
 package com.software.ddk.coloredfire.client;
 
+import com.software.ddk.coloredfire.ColoredFireMod;
+import com.software.ddk.coloredfire.client.particles.GenericFlameParticle;
 import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
+import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlockEntity;
+import com.software.ddk.coloredfire.common.item.torch.GenericTorchItem;
 import com.software.ddk.coloredfire.util.Colors;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.DyeableItem;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import java.util.Objects;
 
@@ -37,10 +45,27 @@ public class ClientColoredFireMod implements ClientModInitializer {
             return (tintIndex == 0) ? color : Colors.colorLighter(color, 0.88f);
         }, DYEABLE_FIRE_BLOCK);
 
+        //dyeable torches
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (tintIndex == 1) ? ((GenericTorchItem) stack.getItem()).getColor(stack) : 0xffffff, GENERIC_TORCH_ITEM);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
+            World world = MinecraftClient.getInstance().world;
+            assert world != null;
+            assert pos != null;
+            int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR()  : 0xffffff;
+            return (tintIndex == 0) ? color : (tintIndex == 2) ? Colors.colorLighter(color, 0.88f) : 0xffffff;
+        }, GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
+
+        //torch particles registry
+        ParticleFactoryRegistry.getInstance().register(GENERIC_FLAME_PARTICLE, GenericFlameParticle.Factory::new);
+        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.PARTICLE_ATLAS_TEX).register((atlasTexture, registry) -> {
+            registry.register(new Identifier(ColoredFireMod.MODID, "particle/generic_flame"));
+        });
+
         //renderlayers
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 BLUE_FIRE_BLOCK, RED_FIRE_BLOCK, GREEN_FIRE_BLOCK, BLACK_FIRE_BLOCK,
-                PURPLE_FIRE_BLOCK, WHITE_FIRE_BLOCK, YELLOW_FIRE_BLOCK, DYEABLE_FIRE_BLOCK);
+                PURPLE_FIRE_BLOCK, WHITE_FIRE_BLOCK, YELLOW_FIRE_BLOCK, DYEABLE_FIRE_BLOCK,
+                GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
 
     }
 }
