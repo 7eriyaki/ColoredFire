@@ -13,7 +13,6 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -57,15 +56,25 @@ public class GenericWallTorchBlock extends WallTorchBlock implements BlockEntity
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!player.abilities.creativeMode){
-            //cancel on creative
-            GenericTorchItem item = (GenericTorchItem) state.getBlock().asItem();
-            ItemStack stack = new ItemStack(item);
-            int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
-            item.setColor(stack, color);
-            ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
-            world.spawnEntity(entity);
+            this.dropItem(world, state, pos);
         }
         super.onBreak(world, pos, state, player);
+    }
+
+    @Override
+    public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        //todo - fix piston broken torch not spawning
+        super.onBlockRemoved(state, world, pos, newState, moved);
+    }
+
+    private void dropItem(World world, BlockState state, BlockPos pos){
+        GenericTorchItem item = (GenericTorchItem) state.getBlock().asItem();
+        ItemStack stack = new ItemStack(item);
+        int color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
+        item.setColor(stack, color);
+        ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
+        world.spawnEntity(entity);
+
     }
 
     @Override
