@@ -18,6 +18,7 @@ import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+
 import java.util.Objects;
 
 import static com.software.ddk.coloredfire.ModContent.*;
@@ -57,7 +58,7 @@ public class ClientColoredFireMod implements ClientModInitializer {
             } catch (NullPointerException e){
                 //todo - temporary fix for a crash with conveyance 0.3.2
             }
-            return (tintIndex == 0) ? color : (tintIndex == 2) ? Colors.colorLighter(color, 0.88f) : 0xffffff;
+            return (tintIndex == 0) ? color : (tintIndex == 2) ? Colors.colorLighter(color, 0.9f) : 0xffffff;
         }, GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
 
         //torch particles registry

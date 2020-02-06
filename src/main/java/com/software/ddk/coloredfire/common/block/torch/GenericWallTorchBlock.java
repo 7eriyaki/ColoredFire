@@ -27,7 +27,7 @@ public class GenericWallTorchBlock extends WallTorchBlock implements BlockEntity
                 .breakInstantly()
                 .lightLevel(14)
                 .sounds(BlockSoundGroup.WOOD)
-                .dropsLike(Blocks.GLASS).build(), ParticleTypes.EFFECT);
+                .dropsLike(Blocks.GLASS).build(), ModContent.GENERIC_FLAME_PARTICLE);
     }
 
     public int getCOLOR(){
@@ -55,16 +55,30 @@ public class GenericWallTorchBlock extends WallTorchBlock implements BlockEntity
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!player.abilities.creativeMode){
+        if (!world.isClient && (!player.isCreative() && !isPistonAdyacent(world, pos))){
             this.dropItem(world, state, pos);
         }
         super.onBreak(world, pos, state, player);
     }
 
+    private boolean isPistonAdyacent(World world, BlockPos pos){
+        BlockPos[] nearby = new BlockPos[]{
+                pos.east(), pos.west(), pos.north(), pos.south(), pos.up(), pos.down()
+        };
+
+        for (BlockPos blockPos : nearby) {
+            if (world.getBlockState(blockPos).getBlock() instanceof PistonBlock) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        //todo - fix piston broken torch not spawning
-        super.onBlockRemoved(state, world, pos, newState, moved);
+        if (isPistonAdyacent(world, pos)){
+            this.dropItem(world, state, pos);
+        }
     }
 
     private void dropItem(World world, BlockState state, BlockPos pos){
@@ -74,7 +88,6 @@ public class GenericWallTorchBlock extends WallTorchBlock implements BlockEntity
         item.setColor(stack, color);
         ItemEntity entity = new ItemEntity(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), stack);
         world.spawnEntity(entity);
-
     }
 
     @Override

@@ -16,8 +16,6 @@ public class Colors {
         red = (red << 16) & 0x00ff0000;
         green = (green << 8) & 0x0000ff00;
         blue = blue & 0x000000ff;
-        //int tst = 0xFF000000 | red | green | blue;
-        //System.out.println("color: " + tst);
         return 0xFF000000|red|green|blue;
     }
 

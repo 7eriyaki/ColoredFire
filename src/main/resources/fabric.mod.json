@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Colored Flames",
-  "description": "Colorful and decorative flames",
+  "description": "Colorful magical and decorative flames",
   "authors": [
     "DiegoDDK"
   ],
@@ -26,17 +26,13 @@
     ]
   },
   "mixins": [
-    {
-      "environment" : "*",
-      "config" : "coloredfire.mixins.json"
-    }
   ],
   "depends": {
-    "fabricloader": ">=0.4.0",
+    "fabricloader": ">=0.7.0",
     "fabric": "*",
     "minecraft": ">=1.15.0"
   },
   "suggests": {
-    "me": "*"
+    "coloredflames": "*"
   }
 }

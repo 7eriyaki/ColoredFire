@@ -25,6 +25,9 @@ public class CustomFlammablesRegistry {
             ((DyeableFireBlock) ModContent.DYEABLE_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
         }
 
+        //special
+        ((GreenFireBlock) ModContent.GREEN_FIRE_BLOCK).registerFlammableBlock(Blocks.WATER, 10, 15);
+
     }
 
     static{
