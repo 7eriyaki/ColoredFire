@@ -27,7 +27,7 @@ public class GenericWallTorchBlock extends WallTorchBlock implements BlockEntity
                 .breakInstantly()
                 .lightLevel(14)
                 .sounds(BlockSoundGroup.WOOD)
-                .dropsLike(Blocks.GLASS).build());
+                .dropsLike(Blocks.GLASS).build(), ParticleTypes.EFFECT);
     }
 
     public int getCOLOR(){

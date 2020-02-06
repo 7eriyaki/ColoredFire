@@ -11,6 +11,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +30,9 @@ public class GenericTorchBlock extends TorchBlock implements BlockEntityProvider
                 .breakInstantly()
                 .lightLevel(14)
                 .sounds(BlockSoundGroup.WOOD)
-                .build());
+                .build(), ParticleTypes.EFFECT);
+
+        //todo - check this.
     }
 
     public int getCOLOR(){

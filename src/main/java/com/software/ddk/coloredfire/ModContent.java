@@ -51,7 +51,7 @@ public class ModContent {
 
     public static final DefaultParticleType GENERIC_FLAME_PARTICLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(ColoredFireMod.MODID, "generic_flame"), FabricParticleTypes.simple(true));
 
-    public static void RegisterAll(){
+    public static void registerAll(){
         ColoredFireMod.COLOREDLOG.info("Colored Flames Mod Loading");
 
         //blockentity

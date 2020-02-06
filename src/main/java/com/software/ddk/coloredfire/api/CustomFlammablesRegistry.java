@@ -1,4 +1,5 @@
-package com.software.ddk.coloredfire.mixins;
+package com.software.ddk.coloredfire.api;
+
 
 import com.software.ddk.coloredfire.ColoredFireMod;
 import com.software.ddk.coloredfire.ModContent;
@@ -6,47 +7,28 @@ import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FireBlock;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(FireBlock.class)
-public abstract class FireBlockMixin extends Block {
-    public FireBlockMixin(Settings settings) {
-        super(settings);
-    }
+public class CustomFlammablesRegistry {
+    private static Object[][] FLAMMABLE_BLOCKS;
 
-    @Inject(at = @At("HEAD"), method = "registerDefaultFlammables")
-    private static void onRegisterDefaultFlammables(CallbackInfo ci){
+    public static void registerAll(){
         ColoredFireMod.COLOREDLOG.info("Registering custom fire flammables integration...");
-        Object[][] flammables = getFireArray();
 
-        //custom fire flamables registering
-        BlackFireBlock blackFireBlock = (BlackFireBlock) ModContent.BLACK_FIRE_BLOCK;
-        BlueFireBlock blueFireBlock = (BlueFireBlock) ModContent.BLUE_FIRE_BLOCK;
-        GreenFireBlock greenFireBlock = (GreenFireBlock) ModContent.GREEN_FIRE_BLOCK;
-        PurpleFireBlock purpleFireBlock = (PurpleFireBlock) ModContent.PURPLE_FIRE_BLOCK;
-        RedFireBlock redFireBlock = (RedFireBlock) ModContent.RED_FIRE_BLOCK;
-        WhiteFireBlock whiteFireBlock = (WhiteFireBlock) ModContent.WHITE_FIRE_BLOCK;
-        YellowFireBlock yellowFireBlock = (YellowFireBlock) ModContent.YELLOW_FIRE_BLOCK;
-        DyeableFireBlock dyeableFireBlock = (DyeableFireBlock) ModContent.DYEABLE_FIRE_BLOCK;
-
-        for (Object[] flammable : flammables) {
-            blackFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            blueFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            greenFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            purpleFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            redFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            whiteFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            yellowFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            dyeableFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+        for (Object[] flammable : FLAMMABLE_BLOCKS) {
+            ((BlackFireBlock) ModContent.BLACK_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((BlueFireBlock) ModContent.BLUE_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((RedFireBlock) ModContent.RED_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((GreenFireBlock) ModContent.GREEN_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((YellowFireBlock) ModContent.YELLOW_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((PurpleFireBlock) ModContent.PURPLE_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((WhiteFireBlock) ModContent.WHITE_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+            ((DyeableFireBlock) ModContent.DYEABLE_FIRE_BLOCK).registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
         }
+
     }
 
-    private static Object[][] getFireArray(){
-        return new Object[][]{
+    static{
+        FLAMMABLE_BLOCKS = new Object[][]{
                 {Blocks.OAK_PLANKS, 5, 20},
                 {Blocks.SPRUCE_PLANKS, 5, 20},
                 {Blocks.BIRCH_PLANKS, 5, 20},
@@ -176,5 +158,4 @@ public abstract class FireBlockMixin extends Block {
                 {Blocks.BEE_NEST, 30, 20}
         };
     }
-
 }

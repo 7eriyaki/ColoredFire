@@ -3,10 +3,8 @@
   "package" : "com.software.ddk.coloredfire.mixins",
   "compatibilityLevel" : "JAVA_8",
   "mixins" : [
-    "FireBlockMixin"
   ],
   "injectors" : {
     "defaultRequire" : 1
-  },
-  "refmap" : "coloredfire-refmap.json"
+  }
 }
