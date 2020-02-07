@@ -33,8 +33,8 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	//compatibility
-    modImplementation "com.github.TerraformersMC:Terrestria:88a09d9"
-	modImplementation "com.github.TerraformersMC:Traverse:cdcd9c1"
+	modImplementation 'com.terraformersmc:terrestria:1.3.1+build.3'
+	modImplementation 'com.terraformersmc:traverse:2.2.0+build.1'
 
 }
 

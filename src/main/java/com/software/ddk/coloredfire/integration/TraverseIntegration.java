@@ -12,6 +12,7 @@ public class TraverseIntegration {
 
     public static Object[][] getFlammables(){
         ColoredFireMod.COLOREDLOG.info("[Colored Flames] Traverse detected, adding flammables integration");
+        //todo - check latest curseforge release.
         return new Object[][]{
                 {TraverseBlocks.BROWN_AUTUMNAL_LEAVES, 5, 20},
                 {TraverseBlocks.ORANGE_AUTUMNAL_LEAVES, 5, 20},
@@ -25,7 +26,7 @@ public class TraverseIntegration {
                 {TraverseBlocks.FIR_LOG, 5, 20},
                 {TraverseBlocks.FIR_PLANKS, 5, 20},
                 {TraverseBlocks.FIR_PRESSURE_PLATE, 5, 20},
-                {TraverseBlocks.FIR_SIGN, 5, 20},
+                //{TraverseBlocks.FIR_SIGN, 5, 20},
                 {TraverseBlocks.FIR_SLAB, 5, 20},
                 {TraverseBlocks.FIR_STAIRS, 5, 20},
                 {TraverseBlocks.FIR_TRAPDOOR, 5, 20},
