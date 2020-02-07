@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.2.6-SNAPSHOT'
 	id 'maven-publish'
+    id 'com.wynprice.cursemaven' version '2.1.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -14,13 +15,27 @@ minecraft {
 
 }
 
+repositories {
+	mavenLocal();
+	jcenter();
+	maven { url "https://maven.fabricmc.net/" }
+	maven {
+		name = "JitPack"
+		url = "https://jitpack.io"
+	}
+    maven{ url="https://minecraft.curseforge.com/api/maven" }
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	
+	//compatibility
+    modImplementation "com.github.TerraformersMC:Terrestria:88a09d9"
+	modImplementation "com.github.TerraformersMC:Traverse:cdcd9c1"
+
 }
 
 processResources {
