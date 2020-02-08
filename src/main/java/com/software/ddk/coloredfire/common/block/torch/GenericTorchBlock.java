@@ -3,11 +3,9 @@ package com.software.ddk.coloredfire.common.block.torch;
 import com.software.ddk.coloredfire.ModContent;
 import com.software.ddk.coloredfire.common.item.torch.GenericTorchItem;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.block.TorchBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -54,16 +52,35 @@ public class GenericTorchBlock extends TorchBlock implements BlockEntityProvider
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!player.abilities.creativeMode){
+        if (!world.isClient && (!player.isCreative() && !isPistonAdyacent(world, pos))){
             this.dropItem(world, state, pos);
         }
         super.onBreak(world, pos, state, player);
     }
 
+    private boolean isPistonAdyacent(World world, BlockPos pos){
+        BlockPos[] nearby = new BlockPos[]{
+                pos.east(), pos.west(), pos.north(), pos.south(), pos.up(), pos.down()
+        };
+
+        for (BlockPos blockPos : nearby) {
+            if (world.getBlockState(blockPos).getBlock() instanceof PistonBlock) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        //todo - fix piston broken torch not spawning
-        super.onBlockRemoved(state, world, pos, newState, moved);
+        if (isPistonAdyacent(world, pos)){
+            this.dropItem(world, state, pos);
+        }
+    }
+
+    @Override
+    public PistonBehavior getPistonBehavior(BlockState state) {
+        return PistonBehavior.DESTROY;
     }
 
     private void dropItem(World world, BlockState state, BlockPos pos){

@@ -8,6 +8,7 @@ public class BlackFireBlock extends GenericFireBlock {
     public static final int COLOR_BRIGHT = -11184811;
 
     public BlackFireBlock() {
-        super(StatusEffects.WITHER, COLOR, 8, 150, 15);
+        super(StatusEffects.WITHER, COLOR, 9, 160, 20);
     }
+
 }

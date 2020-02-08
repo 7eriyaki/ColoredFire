@@ -25,14 +25,13 @@ public class GenericFlameParticle extends SpriteBillboardParticle {
       this.z += (double)((this.random.nextFloat() - this.random.nextFloat()) * 0.05F);
       this.maxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
 
-      //aca se deberia de obtener el bloque y el color.
       BlockPos pos = new BlockPos(x, y, z);
       BlockState state = world.getBlockState(pos);
       Block block = state.getBlock();
 
       if (block instanceof GenericTorchBlock || block instanceof GenericWallTorchBlock){
          int color = (block.hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
-         float[] col = Colors.getRGBColor(color);
+         float[] col = Colors.getRGBColor(Colors.colorLighter(color, 0.9f));
          this.setColor(col[0], col[1], col[2]);
       }
    }
