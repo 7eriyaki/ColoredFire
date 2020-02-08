@@ -1,0 +1,12 @@
+{
+  "required" : true,
+  "package" : "com.software.ddk.coloredfire.mixins",
+  "compatibilityLevel" : "JAVA_8",
+  "mixins" : [
+    "MixinInitializerClient",
+    "MixinInitializerServer"
+  ],
+  "injectors" : {
+    "defaultRequire" : 1
+  }
+}
