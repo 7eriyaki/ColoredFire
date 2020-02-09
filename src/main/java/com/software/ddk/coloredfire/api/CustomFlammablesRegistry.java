@@ -37,19 +37,24 @@ public class CustomFlammablesRegistry {
             registerFlammableList(TraverseIntegration.getFlammables());
         }
 
-
     }
 
     private static void registerFlammableList(Object[][] flammableList){
-        for (Object[] flammable : flammableList) {
-            blackFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            blueFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            redFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            greenFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            yellowFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            purpleFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            whiteFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
-            dyeableFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+        if (flammableList != null){
+            for (Object[] flammable : flammableList) {
+                if (flammable[0] != null){
+                    blackFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    blueFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    redFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    greenFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    yellowFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    purpleFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    whiteFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                    dyeableFireBlock.registerFlammableBlock((Block) flammable[0], (int) flammable[1], (int) flammable[2]);
+                }
+            }
+        } else {
+            ColoredFireMod.COLOREDLOG.error("[ColoredFlames] integration flammables registering failed");
         }
     }
 

@@ -23,9 +23,16 @@
     ],
     "client":[
       "com.software.ddk.coloredfire.client.ClientColoredFireMod"
+    ],
+    "postregister": [
+      "com.software.ddk.coloredfire.PostColoredFireMod"
     ]
   },
   "mixins": [
+    {
+      "environment" : "*",
+      "config" : "coloredflames.mixins.json"
+    }
   ],
   "depends": {
     "fabricloader": ">=0.7.0",
