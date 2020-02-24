@@ -12,14 +12,13 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-
-import java.util.Objects;
 
 import static com.software.ddk.coloredfire.ModContent.*;
 
@@ -32,7 +31,7 @@ public class ClientColoredFireMod implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? RedFireBlock.COLOR : RedFireBlock.COLOR_BRIGHT, RED_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? GreenFireBlock.COLOR : GreenFireBlock.COLOR_BRIGHT, GREEN_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? PurpleFireBlock.COLOR : PurpleFireBlock.COLOR_BRIGHT, PURPLE_FIRE_BLOCK);
-        ColorProviderRegistry.BLOCK.register((blockState, extendedBlockView, blockPos, i) -> WhiteFireBlock.COLOR, WHITE_FIRE_BLOCK);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> WhiteFireBlock.COLOR, WHITE_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? YellowFireBlock.COLOR : YellowFireBlock.COLOR_BRIGHT, YELLOW_FIRE_BLOCK);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> (tintIndex == 0) ? BlackFireBlock.COLOR : BlackFireBlock.COLOR_BRIGHT, BLACK_FIRE_BLOCK);
 
@@ -40,9 +39,18 @@ public class ClientColoredFireMod implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (tintIndex == 1) ? ((DyeableItem) stack.getItem()).getColor(stack) : 0xffffff, FLINT_AND_STEEL_DYEABLE);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             World world = MinecraftClient.getInstance().world;
-            assert world != null;
-            assert pos != null;
-            int color = (state.getBlock().hasBlockEntity()) ? ((DyeableFireBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR() : 0xffffff;
+            BlockEntity blockEntity;
+            int color = 0xffffff;
+            try {
+                if (state.getBlock().hasBlockEntity()){
+                    assert world != null;
+                    assert pos != null;
+                    blockEntity = world.getBlockEntity(pos);
+                    color = (blockEntity instanceof DyeableFireBlockEntity) ? ((DyeableFireBlockEntity) blockEntity).getCOLOR() : 0xffffff;
+                }
+            } catch (NullPointerException ex){
+                //todo - try to reproduce this nullpointer crash
+            }
             return (tintIndex == 0) ? color : Colors.colorLighter(color, 0.88f);
         }, DYEABLE_FIRE_BLOCK);
 
@@ -50,13 +58,17 @@ public class ClientColoredFireMod implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (tintIndex == 1) ? ((GenericTorchItem) stack.getItem()).getColor(stack) : 0xffffff, GENERIC_TORCH_ITEM);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             World world = MinecraftClient.getInstance().world;
-            assert world != null;
-            assert pos != null;
+            BlockEntity blockEntity;
             int color = 0xffffff;
             try {
-                color = (state.getBlock().hasBlockEntity()) ? ((GenericTorchBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).getCOLOR()  : 0xffffff;
-            } catch (NullPointerException e){
-                //todo - temporary fix for a crash with conveyance 0.3.2
+                if (state.getBlock().hasBlockEntity()){
+                    assert world != null;
+                    assert pos != null;
+                    blockEntity = world.getBlockEntity(pos);
+                    color = (blockEntity instanceof GenericTorchBlockEntity) ? ((GenericTorchBlockEntity) blockEntity).getCOLOR() : 0xffffff;
+                }
+            } catch (NullPointerException ex){
+                //todo - try to reproduce this nullpointer crash (Torch)
             }
             return (tintIndex == 0) ? color : (tintIndex == 2) ? Colors.colorLighter(color, 0.9f) : 0xffffff;
         }, GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
