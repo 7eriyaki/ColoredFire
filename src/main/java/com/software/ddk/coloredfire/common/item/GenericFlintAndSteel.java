@@ -4,10 +4,7 @@ import com.software.ddk.coloredfire.ModContent;
 import com.software.ddk.coloredfire.common.block.colored.GreenFireBlock;
 import com.software.ddk.coloredfire.common.material.GenericToolMaterial;
 import net.minecraft.advancement.criterion.Criterions;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FireBlock;
-import net.minecraft.block.NetherPortalBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -81,16 +78,17 @@ public class GenericFlintAndSteel extends ToolItem {
                 !(Boolean)blockState_1.get(Properties.LIT);
     }
 
-    private static boolean canIgnite(BlockState blockState_1, IWorld iWorld_1, BlockPos blockPos_1) {
-        BlockState blockState_2 = ((FireBlock)Blocks.FIRE).getStateForPosition(iWorld_1, blockPos_1);
+    private static boolean canIgnite(BlockState state, IWorld world, BlockPos pos) {
+        //todo nether portal ignite is disabled
+        BlockState blockState_2 = AbstractFireBlock.getState(world, pos);
         boolean boolean_1 = false;
         for (Direction direction_1 : Direction.Type.HORIZONTAL) {
-            if (iWorld_1.getBlockState(blockPos_1.offset(direction_1)).getBlock() == Blocks.OBSIDIAN &&
-                    ((NetherPortalBlock) Blocks.NETHER_PORTAL).createAreaHelper(iWorld_1, blockPos_1) != null) {
+            if (world.getBlockState(pos.offset(direction_1)).getBlock() == Blocks.OBSIDIAN &&
+                    ((NetherPortalBlock) Blocks.NETHER_PORTAL).createAreaHelper(world, pos) != null) {
                 boolean_1 = true;
             }
         }
-        return blockState_1.isAir() && (blockState_2.canPlaceAt(iWorld_1, blockPos_1) || boolean_1);
+        return state.isAir() && (blockState_2.canPlaceAt(world, pos) || boolean_1);
     }
 
 }

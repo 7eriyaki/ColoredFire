@@ -1,10 +1,11 @@
 package com.software.ddk.coloredfire.integration;
 
 import com.software.ddk.coloredfire.ColoredFireMod;
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.fabricmc.loader.FabricLoader;
 
 public class TerrestriaIntegration {
+
+    /*
 
     public static boolean isLoaded(){
         return FabricLoader.INSTANCE.isModLoaded("terrestria");
@@ -177,4 +178,5 @@ public class TerrestriaIntegration {
         };
     }
 
+     */
 }

@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -13,7 +12,9 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
@@ -24,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.dimension.TheEndDimension;
 
+import java.util.Map;
 import java.util.Random;
 
 public class GenericFireBlock extends FireBlock {
@@ -36,6 +38,8 @@ public class GenericFireBlock extends FireBlock {
     private VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 0.1D, 16.0D);
     private final Object2IntMap<Block> burnChances = new Object2IntOpenHashMap();
     private final Object2IntMap<Block> spreadChances = new Object2IntOpenHashMap();
+
+    private static final Map<Direction, BooleanProperty> DIRECTION_PROPERTIES = ConnectingBlock.FACING_PROPERTIES.entrySet().stream().filter((entry) -> entry.getKey() != Direction.DOWN).collect(Util.toMap());
 
     public GenericFireBlock(StatusEffect statusEffect, int colorInt, int fireTime, int effectTime, int effectLevel) {
         super(FabricBlockSettings.of(Material.FIRE)
@@ -83,13 +87,35 @@ public class GenericFireBlock extends FireBlock {
         }
     }
 
+    public BlockState getStateForPosition(BlockView world, BlockPos pos) {
+        BlockPos blockPos = pos.down();
+        BlockState blockState = world.getBlockState(blockPos);
+        if (!this.isFlammable(blockState) && !blockState.isSideSolidFullSquare(world, blockPos, Direction.UP)) {
+            BlockState blockState2 = this.getDefaultState();
+            Direction[] var6 = Direction.values();
+            int var7 = var6.length;
+
+            for(int var8 = 0; var8 < var7; ++var8) {
+                Direction direction = var6[var8];
+                BooleanProperty booleanProperty = (BooleanProperty)DIRECTION_PROPERTIES.get(direction);
+                if (booleanProperty != null) {
+                    blockState2 = (BlockState)blockState2.with(booleanProperty, this.isFlammable(world.getBlockState(pos.offset(direction))));
+                }
+            }
+
+            return blockState2;
+        } else {
+            return this.getDefaultState();
+        }
+    }
+
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
@@ -113,7 +139,7 @@ public class GenericFireBlock extends FireBlock {
                 }
 
                 if (!bl) {
-                    world.getBlockTickScheduler().schedule(pos, this, this.getTickRate(world) + random.nextInt(10));
+                    world.getBlockTickScheduler().schedule(pos, this, method_26155(world.random));
                     if (!this.areBlocksAroundFlammable(world, pos)) {
                         BlockPos blockPos = pos.down();
                         if (!world.getBlockState(blockPos).isSideSolidFullSquare(world, blockPos, Direction.UP) || i > 3) {
@@ -148,7 +174,8 @@ public class GenericFireBlock extends FireBlock {
                                     o += (n - 1) * 100;
                                 }
 
-                                mutable.set((Vec3i)pos).setOffset(l, n, m);
+                                //mutable.set((Vec3i)pos).setOffset(l, n, m);
+                                mutable.set((Vec3i)pos, l, n, m);
                                 int p = this.getBurnChance(world, mutable);
                                 if (p > 0) {
                                     int q = (p + 40 + world.getDifficulty().getId() * 7) / (i + 30);
@@ -168,6 +195,10 @@ public class GenericFireBlock extends FireBlock {
 
             }
         }
+    }
+
+    private static int method_26155(Random random) {
+        return 30 + random.nextInt(10);
     }
 
     private int getBurnChance(BlockState state) {

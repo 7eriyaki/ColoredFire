@@ -4,8 +4,8 @@ import com.software.ddk.coloredfire.ModContent;
 import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlock;
 import com.software.ddk.coloredfire.common.block.torch.GenericWallTorchBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
@@ -65,6 +65,6 @@ public class GenericTorchItem extends WallStandingBlockItem implements DyeableIt
             }
         }
 
-        return blockState2 != null && worldView.canPlace(blockState2, blockPos, EntityContext.absent()) ? blockState2 : null;
+        return blockState2 != null && worldView.canPlace(blockState2, blockPos, ShapeContext.absent()) ? blockState2 : null;
     }
 }

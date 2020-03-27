@@ -28,14 +28,15 @@ public class CustomFlammablesRegistry {
         registerFlammableList(FLAMMABLE_BLOCKS);
 
         //terrestria
-        if (TerrestriaIntegration.isLoaded()){
-            registerFlammableList(TerrestriaIntegration.getFlammables());
-        }
+        //todo temporary disabled
+        //if (TerrestriaIntegration.isLoaded()){
+        //            registerFlammableList(TerrestriaIntegration.getFlammables());
+        //        }
 
         //traverse
-        if (TraverseIntegration.isLoaded()){
-            registerFlammableList(TraverseIntegration.getFlammables());
-        }
+        //if (TraverseIntegration.isLoaded()){
+        //            registerFlammableList(TraverseIntegration.getFlammables());
+        //        }
 
 
     }

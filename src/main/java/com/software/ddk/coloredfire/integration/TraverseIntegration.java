@@ -1,10 +1,11 @@
 package com.software.ddk.coloredfire.integration;
 
 import com.software.ddk.coloredfire.ColoredFireMod;
-import com.terraformersmc.traverse.block.TraverseBlocks;
 import net.fabricmc.loader.FabricLoader;
 
 public class TraverseIntegration {
+
+    /*
 
     public static boolean isLoaded(){
         return FabricLoader.INSTANCE.isModLoaded("traverse");
@@ -36,5 +37,7 @@ public class TraverseIntegration {
                 {TraverseBlocks.STRIPPED_FIR_WOOD, 5, 20}
         };
     }
+
+    */
 
 }

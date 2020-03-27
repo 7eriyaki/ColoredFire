@@ -2,6 +2,7 @@ package com.software.ddk.coloredfire.common.block.dyeable;
 
 import com.software.ddk.coloredfire.ModContent;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
@@ -29,8 +30,8 @@ public class DyeableFireBlockEntity extends BlockEntity implements BlockEntityCl
     }
 
     @Override
-    public void fromTag(CompoundTag tag) {
-        super.fromTag(tag);
+    public void fromTag(BlockState blockState, CompoundTag tag) {
+        super.fromTag(blockState, tag);
         COLOR = tag.getInt("color");
     }
 
