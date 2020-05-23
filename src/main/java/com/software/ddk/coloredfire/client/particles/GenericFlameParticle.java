@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
+@Deprecated
 public class GenericFlameParticle extends SpriteBillboardParticle {
    private GenericFlameParticle(World world, double x, double y, double z, double vX, double vY, double vZ) {
       super(world, x, y, z, vX, vY, vZ);

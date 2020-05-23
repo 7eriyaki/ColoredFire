@@ -1,7 +1,7 @@
 package com.software.ddk.coloredfire.client;
 
 import com.software.ddk.coloredfire.ColoredFireMod;
-import com.software.ddk.coloredfire.client.particles.GenericFlameParticle;
+import com.software.ddk.coloredfire.client.particles.ColoredParticleFactory;
 import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
 import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlockEntity;
@@ -19,8 +19,6 @@ import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-
-import java.util.Objects;
 
 import static com.software.ddk.coloredfire.ModContent.*;
 
@@ -76,7 +74,7 @@ public class ClientColoredFireMod implements ClientModInitializer {
         }, GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
 
         //torch particles registry
-        ParticleFactoryRegistry.getInstance().register(GENERIC_FLAME_PARTICLE, GenericFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(GENERIC_FLAME_PARTICLE, ColoredParticleFactory::new);
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.PARTICLE_ATLAS_TEX).register((atlasTexture, registry) -> {
             registry.register(new Identifier(ColoredFireMod.MODID, "particle/generic_flame"));
         });

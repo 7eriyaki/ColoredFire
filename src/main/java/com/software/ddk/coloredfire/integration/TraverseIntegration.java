@@ -20,20 +20,12 @@ public class TraverseIntegration {
                 {TraverseBlocks.RED_AUTUMNAL_LEAVES, 5, 20},
                 {TraverseBlocks.FIR_BUTTON, 5, 20},
                 {TraverseBlocks.FIR_DOOR, 5, 20},
-                {TraverseBlocks.FIR_FENCE, 5, 20},
-                {TraverseBlocks.FIR_FENCE_GATE, 5, 20},
                 {TraverseBlocks.FIR_LEAVES, 5, 20},
                 {TraverseBlocks.FIR_LOG, 5, 20},
                 {TraverseBlocks.FIR_PLANKS, 5, 20},
                 {TraverseBlocks.FIR_PRESSURE_PLATE, 5, 20},
                 //{TraverseBlocks.FIR_SIGN, 5, 20},
-                {TraverseBlocks.FIR_SLAB, 5, 20},
-                {TraverseBlocks.FIR_STAIRS, 5, 20},
-                {TraverseBlocks.FIR_TRAPDOOR, 5, 20},
-                {TraverseBlocks.FIR_WALL_SIGN, 5, 20},
-                {TraverseBlocks.FIR_WOOD, 5, 20},
-                {TraverseBlocks.STRIPPED_FIR_LOG, 5, 20},
-                {TraverseBlocks.STRIPPED_FIR_WOOD, 5, 20}
+                {TraverseBlocks.FIR_TRAPDOOR, 5, 20}
         };
     }
 
