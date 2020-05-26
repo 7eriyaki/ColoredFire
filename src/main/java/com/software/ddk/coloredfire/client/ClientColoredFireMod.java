@@ -4,7 +4,9 @@ import com.software.ddk.coloredfire.ColoredFireMod;
 import com.software.ddk.coloredfire.client.particles.ColoredParticleFactory;
 import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
+import com.software.ddk.coloredfire.common.block.lantern.DyeableLanternBlockEntity;
 import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlockEntity;
+import com.software.ddk.coloredfire.common.item.lantern.DyeableLanternItem;
 import com.software.ddk.coloredfire.common.item.torch.GenericTorchItem;
 import com.software.ddk.coloredfire.util.Colors;
 import net.fabricmc.api.ClientModInitializer;
@@ -12,12 +14,18 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.block.BlockColorProvider;
+import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.DyeableItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 
 import static com.software.ddk.coloredfire.ModContent.*;
@@ -79,11 +87,30 @@ public class ClientColoredFireMod implements ClientModInitializer {
             registry.register(new Identifier(ColoredFireMod.MODID, "particle/generic_flame"));
         });
 
+        //dyeable lanterns
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (tintIndex == 1 ) ? ((DyeableLanternItem) stack.getItem()).getColor(stack) : 0xffffff, DYEABLE_LANTERN_ITEM);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
+            World world = MinecraftClient.getInstance().world;
+            BlockEntity blockEntity;
+            int color = 0xffffff;
+            try {
+                if (state.getBlock().hasBlockEntity()){
+                    assert world != null;
+                    assert pos != null;
+                    blockEntity = world.getBlockEntity(pos);
+                    color = (blockEntity instanceof DyeableLanternBlockEntity) ? ((DyeableLanternBlockEntity) blockEntity).getCOLOR() : 0xffffff;
+                }
+            } catch (NullPointerException ex){
+                //todo - try to reproduce this nullpointer crash (Torch)
+            }
+            return (tintIndex == 1 ) ? Colors.colorLighter(color, 0.7f) : 0xffffff;
+        }, DYEABLE_LANTERN_BLOCK);
+
         //renderlayers
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 BLUE_FIRE_BLOCK, RED_FIRE_BLOCK, GREEN_FIRE_BLOCK, BLACK_FIRE_BLOCK,
                 PURPLE_FIRE_BLOCK, WHITE_FIRE_BLOCK, YELLOW_FIRE_BLOCK, DYEABLE_FIRE_BLOCK,
-                GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK);
+                GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK, DYEABLE_LANTERN_BLOCK);
 
     }
 }

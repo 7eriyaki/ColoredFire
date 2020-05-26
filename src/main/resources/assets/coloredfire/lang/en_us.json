@@ -17,5 +17,7 @@
   "coloredfire.flint_and_steel_yellow.tooltip" : "§6Magical yellow fire, §egives jump boost effect",
   "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Dyeable fire, for decorative purposes",
   "block.coloredfire.generic_torch" : "Dyeable Torch",
-  "coloredfire.generic_torch.tooltip" : "§6Dyeable Torch, for decorative purposes"
+  "block.coloredfire.generic_lantern" : "Dyeable Lantern",
+  "coloredfire.generic_torch.tooltip" : "§6Dyeable Torch, for decorative purposes",
+  "coloredfire.dyeablelantern.tooltip" : "§6Dyeable Lantern, for decorative purposes"
 }

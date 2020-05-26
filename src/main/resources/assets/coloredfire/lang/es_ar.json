@@ -17,5 +17,7 @@
   "coloredfire.flint_and_steel_yellow.tooltip" : "§6Fuego mágico amarillo, §eaplica el efecto de salto",
   "coloredfire.flint_and_steel_dyeable.tooltip" : "§6Fuego coloreable, de uso decorativo",
   "block.coloredfire.generic_torch" : "Antorcha coloreable",
-  "coloredfire.generic_torch.tooltip" : "§6Antorcha coloreable, de uso decorativo"
+  "block.coloredfire.generic_lantern" : "Farol coloreable",
+  "coloredfire.generic_torch.tooltip" : "§6Antorcha coloreable, de uso decorativo",
+  "coloredfire.dyeablelantern.tooltip" : "§6Farol coloreable, de uso decorativo"
 }

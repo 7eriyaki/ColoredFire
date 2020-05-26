@@ -3,19 +3,19 @@ package com.software.ddk.coloredfire;
 import com.software.ddk.coloredfire.common.block.colored.*;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlock;
 import com.software.ddk.coloredfire.common.block.dyeable.DyeableFireBlockEntity;
+import com.software.ddk.coloredfire.common.block.lantern.DyeableLanternBlock;
+import com.software.ddk.coloredfire.common.block.lantern.DyeableLanternBlockEntity;
 import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlock;
 import com.software.ddk.coloredfire.common.block.torch.GenericTorchBlockEntity;
 import com.software.ddk.coloredfire.common.block.torch.GenericWallTorchBlock;
 import com.software.ddk.coloredfire.common.item.flintandsteel.*;
+import com.software.ddk.coloredfire.common.item.lantern.DyeableLanternItem;
 import com.software.ddk.coloredfire.common.item.torch.GenericTorchItem;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.WallStandingBlockItem;
+import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -25,6 +25,7 @@ public class ModContent {
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(new Identifier(ColoredFireMod.MODID, "group"), () -> new ItemStack(ModContent.FLINT_AND_STEEL_RED));
     public static BlockEntityType<DyeableFireBlockEntity> DYEABLE_FIRE_BLOCK_ENTITY;
     public static BlockEntityType<GenericTorchBlockEntity> GENERIC_TORCH_BLOCK_ENTITY;
+    public static BlockEntityType<DyeableLanternBlockEntity> DYEABLE_LANTERN_BLOCK_ENTITY;
 
     public static Block BLUE_FIRE_BLOCK = new BlueFireBlock();
     public static Block RED_FIRE_BLOCK = new RedFireBlock();
@@ -38,6 +39,8 @@ public class ModContent {
     public static Block GENERIC_TORCH_BLOCK = new GenericTorchBlock();
     public static Block GENERIC_WALL_TORCH_BLOCK = new GenericWallTorchBlock();
 
+    public static Block DYEABLE_LANTERN_BLOCK = new DyeableLanternBlock();
+
     public static Item FLINT_AND_STEEL_BLUE = new FlintAndSteelBlueItem();
     public static Item FLINT_AND_STEEL_RED = new FlintAndSteelRedItem();
     public static Item FLINT_AND_STEEL_GREEN = new FlintAndSteelGreenItem();
@@ -48,6 +51,7 @@ public class ModContent {
     public static Item FLINT_AND_STEEL_DYEABLE = new FlintAndSteelDyeableItem();
 
     public static Item GENERIC_TORCH_ITEM = new GenericTorchItem();
+    public static Item DYEABLE_LANTERN_ITEM  = new DyeableLanternItem();
 
     public static final DefaultParticleType GENERIC_FLAME_PARTICLE = Registry.register(Registry.PARTICLE_TYPE, new Identifier(ColoredFireMod.MODID, "generic_flame"), FabricParticleTypes.simple(true));
 
@@ -57,6 +61,7 @@ public class ModContent {
         //blockentity
         DYEABLE_FIRE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(ColoredFireMod.MODID, "dyeablefireblockentity"), BlockEntityType.Builder.create(DyeableFireBlockEntity::new, DYEABLE_FIRE_BLOCK).build(null));
         GENERIC_TORCH_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(ColoredFireMod.MODID, "generictorchblockentity"), BlockEntityType.Builder.create(GenericTorchBlockEntity::new, GENERIC_TORCH_BLOCK, GENERIC_WALL_TORCH_BLOCK).build(null));
+        DYEABLE_LANTERN_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(ColoredFireMod.MODID, "dyeablelanternblockentity"), BlockEntityType.Builder.create(DyeableLanternBlockEntity::new, DYEABLE_LANTERN_BLOCK).build(null));
 
         //blocks
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "blue_fire"), BLUE_FIRE_BLOCK);
@@ -69,6 +74,7 @@ public class ModContent {
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "dyeable_fire"), DYEABLE_FIRE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "generic_torch"), GENERIC_TORCH_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "generic_wall_torch"), GENERIC_WALL_TORCH_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(ColoredFireMod.MODID, "generic_lantern"), DYEABLE_LANTERN_BLOCK);
 
         //items
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_blue"), FLINT_AND_STEEL_BLUE);
@@ -80,6 +86,7 @@ public class ModContent {
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_yellow"), FLINT_AND_STEEL_YELLOW);
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "flint_and_steel_dyeable"), FLINT_AND_STEEL_DYEABLE);
         Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "generic_torch"), GENERIC_TORCH_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(ColoredFireMod.MODID, "dyeable_lantern"), DYEABLE_LANTERN_ITEM);
 
     }
 }
